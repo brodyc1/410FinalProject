@@ -62,7 +62,7 @@ namespace AutoRentals
             string vin, type, make, model, year, seatCapacity, costPerDay, imageURL;
             int isThisAnInteger;
             double isThisADecimal;
-            DateTime isThissADate;
+            // DateTime isThissADate;
             vin = txtVin.Text;
             type = txtType.Text;
             make = txtMake.Text;
@@ -104,6 +104,7 @@ namespace AutoRentals
                     lblStatus.Text = "Insert failed: " + innerException.Message;
                 } // Insert failed
             } // Yes, they are integer numbers
+            
             catch (FormatException formatException)
             {
                 lblStatus.Text = "You must enter integer values for Year and SeatCapacity and a deimal for CostPerDay.";

@@ -120,8 +120,8 @@ namespace AutoRentals
             cmd.Connection = conn;
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "INSERT INTO Vehicle VALUES ("
-                + VIN + ",'" + vehicleType + "','" + make + "'," + "','" + model + "','" + vyear + "','" + seatCapacity + "','" +
-                costPerDay + "','" + imageURL + ")";
+                + VIN + ",'" + vehicleType + "','" + make + "','" + model + "','" + vyear + "','" + seatCapacity + "','" +
+                costPerDay + "'," + imageURL + ")";
             conn.Open();
             numRowsAffected = cmd.ExecuteNonQuery();
             conn.Close();
