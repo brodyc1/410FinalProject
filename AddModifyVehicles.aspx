@@ -95,7 +95,7 @@
             <br />
             <br />
         </div>
-        <asp:GridView ID="gvCars" runat="server" DataSourceID="odsAutoVehicleFromDataSet" OnRowDeleted="gvCars_RowDeleted" OnRowUpdated="gvCars_RowUpdated" AutoGenerateColumns="False" Height="399px" Width="774px" style="margin-right: 314px" AllowPaging="True" AllowSorting="True">
+        <asp:GridView ID="gvCars" runat="server" DataSourceID="odsAutoVehicleFromDataSet" DataKeyNames="VIN" OnRowDeleted="gvCars_RowDeleted" OnRowUpdated="gvCars_RowUpdated" AutoGenerateColumns="False" Height="399px" Width="774px" style="margin-right: 314px" AllowPaging="True" AllowSorting="True">
             <AlternatingRowStyle BackColor="#CCCCCC" BorderColor="Black" BorderStyle="Solid" />
         </asp:GridView>
         

@@ -62,7 +62,7 @@ namespace AutoRentals
             string vin, type, make, model, year, seatCapacity, costPerDay, imageURL;
             int isThisAnInteger;
             double isThisADecimal;
-            DateTime isThisADate;
+            DateTime isThissADate;
             vin = txtVin.Text;
             type = txtType.Text;
             make = txtMake.Text;
@@ -80,7 +80,7 @@ namespace AutoRentals
             try
             {
                 isThisAnInteger = Convert.ToInt32(seatCapacity);
-               isThisAnInteger = Convert.ToInt32(year);
+                isThisAnInteger = Convert.ToInt32(year);
                 isThisADecimal = Convert.ToDouble(costPerDay);
                // isThisADate = Convert.ToDateTime(year);
                 try
