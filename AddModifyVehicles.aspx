@@ -14,12 +14,11 @@
 <body>
     <form id="form1" runat="server" enableviewstate="True">
         <div>
-
             <h2>Add, Modify & Delete Vehicles</h2>
             <hr />
-
             <br />
             <br />
+            <%--Code for the Insert Table--%>
             <table border="1">
                 <tr>
                     <td colspan="2" style="text-align:center;"><h3>Add Car</h3></td>
@@ -89,26 +88,45 @@
                     </td>
                 </tr>
             </table>
+            <%--End Code For Table--%>
             <asp:Button ID="btnAddCar" runat="server" Text="Add Car" OnClick="btnAddCar_Click" />
             <br />
             <asp:Label ID="lblStatus" runat="server" EnableViewState="False"></asp:Label>
             <br />
             <br />
         </div>
-        <asp:GridView ID="gvCars" runat="server" DataSourceID="odsAutoVehicleFromDataSet" OnRowDeleted="gvCars_RowDeleted" OnRowUpdated="gvCars_RowUpdated" AutoGenerateColumns="False" Height="399px" Width="774px" style="margin-right: 314px" AllowPaging="True" AllowSorting="True">
+        <asp:GridView ID="gvCars" runat="server" 
+            DataSourceID="odsAutoVehicleFromDataSet"
+            OnRowDeleted="gvCars_RowDeleted" 
+            OnRowUpdated="gvCars_RowUpdated" 
+            DataKeyName="VIN"
+            Height="399px" Width="774px" style="margin-right: 314px" 
+            AllowPaging="True" AllowSorting="True">
             <AlternatingRowStyle BackColor="#CCCCCC" BorderColor="Black" BorderStyle="Solid" />
+            <Columns>
+                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+            </Columns>
         </asp:GridView>
         
-        <asp:ObjectDataSource ID="odsAutoVehicleFromDataSet" ConflictDetection="CompareAllValues" runat="server" DeleteMethod="deleteVehicle" InsertMethod="insertBook" OldValuesParameterFormatString="original_{0}" OnDeleted="odsAutoVehicleFromDataSet_Deleted" OnUpdated="odsAutoVehicleFromDataSet_Updated" SelectMethod="getVehicles" TypeName="AutoRentals.AutoRentalDataSet" UpdateMethod="updateVehicle">
+        <asp:ObjectDataSource ID="odsAutoVehicleFromDataSet"  runat="server" 
+            DeleteMethod="DeleteVehicle" 
+            InsertMethod="insertVehicle"
+            ConflictDetection="CompareAllValues"
+            SelectMethod="GetVehicles" 
+            UpdateMethod="UpdateVehicle"
+            OldValuesParameterFormatString="original_{0}" 
+            OnDeleted="odsAutoVehicleFromDataSet_Deleted" 
+            OnUpdated="odsAutoVehicleFromDataSet_Updated"      
+            TypeName="AutoRentals.AutoRentalDataSet">
             <DeleteParameters>
-                <asp:Parameter Name="og_VIN" Type="String" />
-                <asp:Parameter Name="ogVehicleType" Type="String" />
-                <asp:Parameter Name="og_Make" Type="String" />
-                <asp:Parameter Name="og_Model" Type="String" />
-                <asp:Parameter Name="og_VYear" Type="Int32" />
-                <asp:Parameter Name="og_SeatCapacity" Type="Int32" />
-                <asp:Parameter Name="og_CostPerDay" Type="Decimal" />
-                <asp:Parameter Name="og_ImageURL" Type="String" />
+                <asp:Parameter Name="original_VIN" Type="String" />
+                <asp:Parameter Name="original_VehicleType" Type="String" />
+                <asp:Parameter Name="original_Make" Type="String" />
+                <asp:Parameter Name="original_Model" Type="String" />
+                <asp:Parameter Name="original_VYear" Type="Int32" />
+                <asp:Parameter Name="original_SeatCapacity" Type="Int32" />
+                <asp:Parameter Name="original_CostPerDay" Type="String" />
+                <asp:Parameter Name="original_ImageURL" Type="String" />
             </DeleteParameters>
             <InsertParameters>
                 <asp:Parameter Name="VIN" Type="String" />
@@ -117,29 +135,31 @@
                 <asp:Parameter Name="model" Type="String" />
                 <asp:Parameter Name="vyear" Type="Int32" />
                 <asp:Parameter Name="seatCapacity" Type="Int32" />
-                <asp:Parameter Name="costPerDay" Type="Decimal" />
+                <asp:Parameter Name="costPerDay" Type="String" />
                 <asp:Parameter Name="imageURL" Type="String" />
             </InsertParameters>
             <UpdateParameters>
-                <asp:Parameter Name="vehicleType" Type="String" />
-                <asp:Parameter Name="make" Type="String" />
-                <asp:Parameter Name="model" Type="String" />
-                <asp:Parameter Name="vyear" Type="Int32" />
-                <asp:Parameter Name="seatCapacity" Type="Int32" />
-                <asp:Parameter Name="costPerDay" Type="Decimal" />
-                <asp:Parameter Name="imageURL" Type="String" />
-                <asp:Parameter Name="og_VIN" Type="String" />
-                <asp:Parameter Name="og_Type" Type="String" />
-                <asp:Parameter Name="og_Make" Type="String" />
-                <asp:Parameter Name="og_Model" Type="String" />
-                <asp:Parameter Name="og_VYear" Type="Int32" />
-                <asp:Parameter Name="og_SeatCapacity" Type="Int32" />
-                <asp:Parameter Name="og_CostPerDay" Type="Decimal" />
-                <asp:Parameter Name="og_ImageURL" Type="String" />
+                <%--VehicleType, Make, Model, VYear, SeatCapacity, CostPerDay, ImageUrl, original_VIN, original_VehicleType, original_Make, original_Model, original_VYear, original_SeatCapacity, original_CostPerDay, original_ImageUrl, VIN. --%>
+
+                <asp:Parameter Name="VehicleType" Type="String" />
+                <asp:Parameter Name="Make" Type="String" />
+                <asp:Parameter Name="Model" Type="String" />
+                <asp:Parameter Name="VYear" Type="Int32" />
+                <asp:Parameter Name="SeatCapacity" Type="Int32" />
+                <asp:Parameter Name="CostPerDay" Type="String" />
+                <asp:Parameter Name="ImageURL" Type="String" />
+                <asp:Parameter Name="original_VIN" Type="String" />
+                <asp:Parameter Name="original_VehicleType" Type="String" />
+                <asp:Parameter Name="original_Make" Type="String" />
+                <asp:Parameter Name="original_Model" Type="String" />
+                <asp:Parameter Name="original_VYear" Type="Int32" />
+                <asp:Parameter Name="original_SeatCapacity" Type="Int32" />
+                <asp:Parameter Name="original_CostPerDay" Type="String" />
+                <asp:Parameter Name="original_ImageURL" Type="String" />
             </UpdateParameters>
         </asp:ObjectDataSource>
         
-        <asp:SqlDataSource ID="sdsAutoRental" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:AutoRentalConnectionString %>" DeleteCommand="DELETE FROM [Vehicle] WHERE [VIN] = @original_VIN AND (([VehicleType] = @original_VehicleType) OR ([VehicleType] IS NULL AND @original_VehicleType IS NULL)) AND (([Make] = @original_Make) OR ([Make] IS NULL AND @original_Make IS NULL)) AND (([Model] = @original_Model) OR ([Model] IS NULL AND @original_Model IS NULL)) AND (([VYear] = @original_VYear) OR ([VYear] IS NULL AND @original_VYear IS NULL)) AND (([SeatCapacity] = @original_SeatCapacity) OR ([SeatCapacity] IS NULL AND @original_SeatCapacity IS NULL)) AND (([CostPerDay] = @original_CostPerDay) OR ([CostPerDay] IS NULL AND @original_CostPerDay IS NULL)) AND (([ImageUrl] = @original_ImageUrl) OR ([ImageUrl] IS NULL AND @original_ImageUrl IS NULL))" InsertCommand="INSERT INTO [Vehicle] ([VIN], [VehicleType], [Make], [Model], [VYear], [SeatCapacity], [CostPerDay], [ImageUrl]) VALUES (@VIN, @VehicleType, @Make, @Model, @VYear, @SeatCapacity, @CostPerDay, @ImageUrl)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Vehicle]" UpdateCommand="UPDATE [Vehicle] SET [VehicleType] = @VehicleType, [Make] = @Make, [Model] = @Model, [VYear] = @VYear, [SeatCapacity] = @SeatCapacity, [CostPerDay] = @CostPerDay, [ImageUrl] = @ImageUrl WHERE [VIN] = @original_VIN AND (([VehicleType] = @original_VehicleType) OR ([VehicleType] IS NULL AND @original_VehicleType IS NULL)) AND (([Make] = @original_Make) OR ([Make] IS NULL AND @original_Make IS NULL)) AND (([Model] = @original_Model) OR ([Model] IS NULL AND @original_Model IS NULL)) AND (([VYear] = @original_VYear) OR ([VYear] IS NULL AND @original_VYear IS NULL)) AND (([SeatCapacity] = @original_SeatCapacity) OR ([SeatCapacity] IS NULL AND @original_SeatCapacity IS NULL)) AND (([CostPerDay] = @original_CostPerDay) OR ([CostPerDay] IS NULL AND @original_CostPerDay IS NULL)) AND (([ImageUrl] = @original_ImageUrl) OR ([ImageUrl] IS NULL AND @original_ImageUrl IS NULL))">
+       <%-- <asp:SqlDataSource ID="sdsAutoRental" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:AutoRentalConnectionString %>" DeleteCommand="DELETE FROM [Vehicle] WHERE [VIN] = @original_VIN AND (([VehicleType] = @original_VehicleType) OR ([VehicleType] IS NULL AND @original_VehicleType IS NULL)) AND (([Make] = @original_Make) OR ([Make] IS NULL AND @original_Make IS NULL)) AND (([Model] = @original_Model) OR ([Model] IS NULL AND @original_Model IS NULL)) AND (([VYear] = @original_VYear) OR ([VYear] IS NULL AND @original_VYear IS NULL)) AND (([SeatCapacity] = @original_SeatCapacity) OR ([SeatCapacity] IS NULL AND @original_SeatCapacity IS NULL)) AND (([CostPerDay] = @original_CostPerDay) OR ([CostPerDay] IS NULL AND @original_CostPerDay IS NULL)) AND (([ImageUrl] = @original_ImageUrl) OR ([ImageUrl] IS NULL AND @original_ImageUrl IS NULL))" InsertCommand="INSERT INTO [Vehicle] ([VIN], [VehicleType], [Make], [Model], [VYear], [SeatCapacity], [CostPerDay], [ImageUrl]) VALUES (@VIN, @VehicleType, @Make, @Model, @VYear, @SeatCapacity, @CostPerDay, @ImageUrl)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Vehicle]" UpdateCommand="UPDATE [Vehicle] SET [VehicleType] = @VehicleType, [Make] = @Make, [Model] = @Model, [VYear] = @VYear, [SeatCapacity] = @SeatCapacity, [CostPerDay] = @CostPerDay, [ImageUrl] = @ImageUrl WHERE [VIN] = @original_VIN AND (([VehicleType] = @original_VehicleType) OR ([VehicleType] IS NULL AND @original_VehicleType IS NULL)) AND (([Make] = @original_Make) OR ([Make] IS NULL AND @original_Make IS NULL)) AND (([Model] = @original_Model) OR ([Model] IS NULL AND @original_Model IS NULL)) AND (([VYear] = @original_VYear) OR ([VYear] IS NULL AND @original_VYear IS NULL)) AND (([SeatCapacity] = @original_SeatCapacity) OR ([SeatCapacity] IS NULL AND @original_SeatCapacity IS NULL)) AND (([CostPerDay] = @original_CostPerDay) OR ([CostPerDay] IS NULL AND @original_CostPerDay IS NULL)) AND (([ImageUrl] = @original_ImageUrl) OR ([ImageUrl] IS NULL AND @original_ImageUrl IS NULL))">
             <DeleteParameters>
                 <asp:Parameter Name="original_VIN" Type="String" />
                 <asp:Parameter Name="original_VehicleType" Type="String" />
@@ -178,6 +198,46 @@
                 <asp:Parameter Name="original_ImageUrl" Type="String" />
             </UpdateParameters>
         </asp:SqlDataSource>
+        
+        <asp:ObjectDataSource ID="odsVehicles" runat="server" DeleteMethod="deleteVehicle" InsertMethod="insertVehicle" OldValuesParameterFormatString="original_{0}" SelectMethod="getVehicles" TypeName="AutoRentals.AutoRentalDataSet" UpdateMethod="updateVehicle">
+            <DeleteParameters>
+                <asp:Parameter Name="og_VIN" Type="String" />
+                <asp:Parameter Name="ogVehicleType" Type="String" />
+                <asp:Parameter Name="og_Make" Type="String" />
+                <asp:Parameter Name="og_Model" Type="String" />
+                <asp:Parameter Name="og_VYear" Type="Int32" />
+                <asp:Parameter Name="og_SeatCapacity" Type="Int32" />
+                <asp:Parameter Name="og_CostPerDay" Type="Decimal" />
+                <asp:Parameter Name="og_ImageURL" Type="String" />
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="VIN" Type="String" />
+                <asp:Parameter Name="vehicleType" Type="String" />
+                <asp:Parameter Name="make" Type="String" />
+                <asp:Parameter Name="model" Type="String" />
+                <asp:Parameter Name="vyear" Type="Int32" />
+                <asp:Parameter Name="seatCapacity" Type="Int32" />
+                <asp:Parameter Name="costPerDay" Type="Decimal" />
+                <asp:Parameter Name="imageURL" Type="String" />
+            </InsertParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="vehicleType" Type="String" />
+                <asp:Parameter Name="make" Type="String" />
+                <asp:Parameter Name="model" Type="String" />
+                <asp:Parameter Name="vyear" Type="Int32" />
+                <asp:Parameter Name="seatCapacity" Type="Int32" />
+                <asp:Parameter Name="costPerDay" Type="Decimal" />
+                <asp:Parameter Name="imageURL" Type="String" />
+                <asp:Parameter Name="og_VIN" Type="String" />
+                <asp:Parameter Name="og_Type" Type="String" />
+                <asp:Parameter Name="og_Make" Type="String" />
+                <asp:Parameter Name="og_Model" Type="String" />
+                <asp:Parameter Name="og_VYear" Type="Int32" />
+                <asp:Parameter Name="og_SeatCapacity" Type="Int32" />
+                <asp:Parameter Name="og_CostPerDay" Type="Decimal" />
+                <asp:Parameter Name="og_ImageURL" Type="String" />
+            </UpdateParameters>
+        </asp:ObjectDataSource>--%>
         
     </form>
 </body>

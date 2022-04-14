@@ -22,7 +22,7 @@ namespace AutoRentals
         {
             if (e.Exception != null)
             {
-                lblStatus.Text = "Unable to save changes. " + e.Exception.Message;
+                lblStatus.Text = "Unable to save changes. " + e.Exception.Message.ToString();
                 e.ExceptionHandled = true;
             }
             else if (e.AffectedRows == 0)
@@ -33,12 +33,12 @@ namespace AutoRentals
             {
                 lblStatus.Text = "Car was updated.";
             }
-        }
+        } //gv row updated
 
         protected void odsAutoVehicleFromDataSet_Deleted(object sender, ObjectDataSourceStatusEventArgs e)
         {
             e.AffectedRows = Convert.ToInt32(e.ReturnValue);
-        }
+        } //ods row deleted 
 
         protected void gvCars_RowDeleted(object sender, GridViewDeletedEventArgs e)
         {
@@ -62,7 +62,7 @@ namespace AutoRentals
             string vin, type, make, model, year, seatCapacity, costPerDay, imageURL;
             int isThisAnInteger;
             double isThisADecimal;
-            DateTime isThisADate;
+            // DateTime isThissADate;
             vin = txtVin.Text;
             type = txtType.Text;
             make = txtMake.Text;
@@ -80,8 +80,8 @@ namespace AutoRentals
             try
             {
                 isThisAnInteger = Convert.ToInt32(seatCapacity);
-               isThisAnInteger = Convert.ToInt32(year);
-                isThisADecimal = Convert.ToDouble(costPerDay);
+                isThisAnInteger = Convert.ToInt32(year);
+               // isThisADecimal = Convert.ToDouble(costPerDay); -- cost per day now a varchar ?
                // isThisADate = Convert.ToDateTime(year);
                 try
                 {
@@ -94,6 +94,7 @@ namespace AutoRentals
                     odsAutoVehicleFromDataSet.InsertParameters["ImageURL"].DefaultValue = imageURL;
 
                     odsAutoVehicleFromDataSet.Insert();
+                    lblStatus.Text = "Vehicle added Successfully";
                 } // Inserted OK
                 catch (Exception insertException)
                 {
@@ -102,15 +103,14 @@ namespace AutoRentals
                     //       and not tell us anything about what kind of an error it was.
                     Exception innerException = insertException.InnerException;
                     lblStatus.Text = "Insert failed: " + innerException.Message;
+
                 } // Insert failed
             } // Yes, they are integer numbers
+            
             catch (FormatException formatException)
             {
                 lblStatus.Text = "You must enter integer values for Year and SeatCapacity and a deimal for CostPerDay.";
             } // No, they are not integer numbers
-
         } // Add this Vehicle
-
-       
     }//end class
 } //end namespace
