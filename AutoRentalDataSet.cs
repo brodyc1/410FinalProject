@@ -47,7 +47,7 @@ namespace AutoRentals
             cmd.Connection = conn;
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "UPDATE Vehicle"
-                + " SET vehicleType = @vehicleType, Make = @Make, Model = @Model, VYear = @Year, SeatCapacity = @SeatCapacity, CostPerDay = @CostPerday, ImageURL = @ImageURL"
+                + " SET vehicleType = @VehicleType, Make = @Make, Model = @Model, VYear = @VYear, SeatCapacity = @SeatCapacity, CostPerDay = @CostPerday, ImageURL = @ImageURL"
                 + " WHERE VIN = @original_VIN"
                 + "   AND VehicleType = @original_VehicleType"
                 + "   AND Make = @original_Make"
@@ -66,7 +66,7 @@ namespace AutoRentals
             cmd.Parameters.AddWithValue("CostPerDay", CostPerDay);
             cmd.Parameters.AddWithValue("ImageURL", ImageURL);
             cmd.Parameters.AddWithValue("original_VIN", original_VIN);
-            cmd.Parameters.AddWithValue("original_Type", original_VehicleType);
+            cmd.Parameters.AddWithValue("original_VehicleType", original_VehicleType);
             cmd.Parameters.AddWithValue("original_Make", original_Make);
             cmd.Parameters.AddWithValue("original_Model", original_Model);
             cmd.Parameters.AddWithValue("original_VYear", original_VYear);
@@ -81,8 +81,9 @@ namespace AutoRentals
         } // updateVehicle
 
         [DataObjectMethod(DataObjectMethodType.Delete)]
-        public static int deleteVehicle(string original_VIN, string original_VehicleType, string original_Make, string original_Model, 
-            int original_VYear, int original_SeatCapacity, string original_CostPerDay, string original_ImageURL)
+        public static int DeleteVehicle(string original_VIN, string original_VehicleType, string original_Make, string original_Model,
+            int original_VYear, int original_SeatCapacity, string original_CostPerDay,
+            string original_ImageURL)
         {
             SqlConnection conn;
             SqlCommand cmd;
@@ -93,7 +94,7 @@ namespace AutoRentals
             cmd.Connection = conn;
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "DELETE FROM Vehicle"
-                + " WHERE VIN = @original_Vin"
+                + " WHERE VIN = @original_VIN"
                 + "   AND VehicleType = @original_VehicleType"
                 + "   AND Make = @original_Make"
                 + "   AND Model = @original_Model"
@@ -102,7 +103,7 @@ namespace AutoRentals
                 + "   AND CostPerDay = @original_CostPerDay"
                 + "   AND ImageURL = @original_ImageURL";
             cmd.Parameters.AddWithValue("original_VIN", original_VIN);
-            cmd.Parameters.AddWithValue("original_Type", original_VehicleType);
+            cmd.Parameters.AddWithValue("original_VehicleType", original_VehicleType);
             cmd.Parameters.AddWithValue("original_Make", original_Make);
             cmd.Parameters.AddWithValue("original_Model", original_Model);
             cmd.Parameters.AddWithValue("original_VYear", original_VYear);
@@ -114,6 +115,42 @@ namespace AutoRentals
             conn.Close();
             return numRowsAffected;
         } // deleteVehicle
+
+        //[DataObjectMethod(DataObjectMethodType.Delete)]
+        //public static int DeleteVehicle(string original_VIN, string original_VehicleType, string original_Make, string original_Model, 
+        //    int original_VYear, 
+        //    int original_SeatCapacity, string original_CostPerDay, string original_ImageURL)
+        //{
+        //    SqlConnection conn;
+        //    SqlCommand cmd;
+        //    int numRowsAffected;
+
+        //    conn = new SqlConnection(getConnectionString());
+        //    cmd = new SqlCommand();
+        //    cmd.Connection = conn;
+        //    cmd.CommandType = CommandType.Text;
+        //    cmd.CommandText = "DELETE FROM Vehicle"
+        //        + "WHERE VIN = @original_VIN"
+        //        + "  AND VehicleType = @original_VehicleType"
+        //        + "  AND Make = @original_Make"
+        //        + "  AND Model = @original_Model"
+        //        + "  AND VYear = @original_VYear"
+        //        + "  AND SeatCapacity = @original_SeatCapacity"
+        //        + "  AND CostPerDay = @original_CostPerDay"
+        //        + "  AND ImageURL = @original_ImageURL";
+        //    cmd.Parameters.AddWithValue("original_VIN", original_VIN);
+        //    cmd.Parameters.AddWithValue("original_VehicleType", original_VehicleType);
+        //    cmd.Parameters.AddWithValue("original_Make", original_Make);
+        //    cmd.Parameters.AddWithValue("original_Model", original_Model);
+        //    cmd.Parameters.AddWithValue("original_VYear", original_VYear);
+        //    cmd.Parameters.AddWithValue("original_SeatCapacity", original_SeatCapacity);
+        //    cmd.Parameters.AddWithValue("original_CostPerDay", original_CostPerDay);
+        //    cmd.Parameters.AddWithValue("original_ImageURL", original_ImageURL);
+        //    conn.Open();
+        //    numRowsAffected = cmd.ExecuteNonQuery();
+        //    conn.Close();
+        //    return numRowsAffected; 
+        //} // delete vehicle 2
         [DataObjectMethod(DataObjectMethodType.Insert)]
         public static int insertVehicle(string VIN, string vehicleType, string make, string model, int vyear, 
             int seatCapacity, string costPerDay, string imageURL)

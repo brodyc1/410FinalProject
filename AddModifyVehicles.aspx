@@ -97,9 +97,10 @@
         </div>
         <asp:GridView ID="gvCars" runat="server" 
             DataSourceID="odsAutoVehicleFromDataSet"
-            OnRowDeleted="gvCars_RowDeleted" 
-            OnRowUpdated="gvCars_RowUpdated" 
             DataKeyNames="VIN"
+            OnRowDeleted="gvCars_RowDeleted" 
+            OnRowUpdated="gvCars_RowUpdated"
+      
             Height="399px" Width="774px" style="margin-right: 314px" 
             AllowPaging="True" AllowSorting="True">
             <AlternatingRowStyle BackColor="#CCCCCC" BorderColor="Black" BorderStyle="Solid" />
@@ -109,7 +110,7 @@
         </asp:GridView>
         
         <asp:ObjectDataSource ID="odsAutoVehicleFromDataSet"  runat="server" 
-            DeleteMethod="deleteVehicle" 
+            DeleteMethod="DeleteVehicle" 
             InsertMethod="insertVehicle"
             ConflictDetection="CompareAllValues"
             SelectMethod="GetVehicles" 

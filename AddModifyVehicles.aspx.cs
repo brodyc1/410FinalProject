@@ -88,6 +88,7 @@ namespace AutoRentals
                     odsAutoVehicleFromDataSet.InsertParameters["VIN"].DefaultValue = vin;
                     odsAutoVehicleFromDataSet.InsertParameters["VehicleType"].DefaultValue = type;
                     odsAutoVehicleFromDataSet.InsertParameters["Make"].DefaultValue = make;
+                    odsAutoVehicleFromDataSet.InsertParameters["Model"].DefaultValue = model;
                     odsAutoVehicleFromDataSet.InsertParameters["VYear"].DefaultValue = year;
                     odsAutoVehicleFromDataSet.InsertParameters["SeatCapacity"].DefaultValue = seatCapacity;
                     odsAutoVehicleFromDataSet.InsertParameters["CostPerDay"].DefaultValue = costPerDay;
