@@ -99,17 +99,17 @@
             DataSourceID="odsAutoVehicleFromDataSet"
             OnRowDeleted="gvCars_RowDeleted" 
             OnRowUpdated="gvCars_RowUpdated" 
-            DataKeyName="VIN"
+            DataKeyNames="VIN"
             Height="399px" Width="774px" style="margin-right: 314px" 
             AllowPaging="True" AllowSorting="True">
             <AlternatingRowStyle BackColor="#CCCCCC" BorderColor="Black" BorderStyle="Solid" />
             <Columns>
-                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+                <asp:CommandField ButtonType="Button" ShowDeleteButton="True" ShowEditButton="True" />
             </Columns>
         </asp:GridView>
         
         <asp:ObjectDataSource ID="odsAutoVehicleFromDataSet"  runat="server" 
-            DeleteMethod="DeleteVehicle" 
+            DeleteMethod="deleteVehicle" 
             InsertMethod="insertVehicle"
             ConflictDetection="CompareAllValues"
             SelectMethod="GetVehicles" 

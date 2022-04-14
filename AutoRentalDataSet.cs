@@ -53,8 +53,8 @@ namespace AutoRentals
                 + "   AND Make = @original_Make"
                 + "   AND Model = @original_Model"
                 + "   AND VYear = @original_VYear"
-                + "   AND SeatCapcity = @original_SeatCapacity"
-                + "   AND CostPerDat = @original_CostPerDay"
+                + "   AND SeatCapacity = @original_SeatCapacity"
+                + "   AND CostPerDay = @original_CostPerDay"
                 + "   AND ImageURL = @original_ImageURL";
 
             //cmd.Parameters.AddWithValue("VIN", VIN);
@@ -63,7 +63,7 @@ namespace AutoRentals
             cmd.Parameters.AddWithValue("Model", Model);
             cmd.Parameters.AddWithValue("VYear", VYear);
             cmd.Parameters.AddWithValue("SeatCapacity", SeatCapacity);
-            cmd.Parameters.AddWithValue("CostPerDat", CostPerDay);
+            cmd.Parameters.AddWithValue("CostPerDay", CostPerDay);
             cmd.Parameters.AddWithValue("ImageURL", ImageURL);
             cmd.Parameters.AddWithValue("original_VIN", original_VIN);
             cmd.Parameters.AddWithValue("original_Type", original_VehicleType);
@@ -81,7 +81,7 @@ namespace AutoRentals
         } // updateVehicle
 
         [DataObjectMethod(DataObjectMethodType.Delete)]
-        public static int DeleteVehicle(string original_VIN, string original_VehicleType, string original_Make, string original_Model, 
+        public static int deleteVehicle(string original_VIN, string original_VehicleType, string original_Make, string original_Model, 
             int original_VYear, int original_SeatCapacity, string original_CostPerDay, string original_ImageURL)
         {
             SqlConnection conn;
@@ -98,8 +98,8 @@ namespace AutoRentals
                 + "   AND Make = @original_Make"
                 + "   AND Model = @original_Model"
                 + "   AND VYear = @original_VYear"
-                + "   AND SeatCapcity = @original_SeatCapacity"
-                + "   AND CostPerDat = @original_CostPerDay"
+                + "   AND SeatCapacity = @original_SeatCapacity"
+                + "   AND CostPerDay = @original_CostPerDay"
                 + "   AND ImageURL = @original_ImageURL";
             cmd.Parameters.AddWithValue("original_VIN", original_VIN);
             cmd.Parameters.AddWithValue("original_Type", original_VehicleType);
