@@ -95,34 +95,38 @@
             <br />
             <br />
         </div>
-        <asp:GridView ID="gvCars" runat="server" DataSourceID="odsAutoVehicleFromDataSet" OnRowDeleted="gvCars_RowDeleted" 
+        <asp:GridView ID="gvCars" runat="server" 
+            DataSourceID="odsAutoVehicleFromDataSet"
+            OnRowDeleted="gvCars_RowDeleted" 
             OnRowUpdated="gvCars_RowUpdated" 
-            Height="399px" Width="774px" style="margin-right: 314px" AllowPaging="True" AllowSorting="True">
+            DataKeyName="VIN"
+            Height="399px" Width="774px" style="margin-right: 314px" 
+            AllowPaging="True" AllowSorting="True">
             <AlternatingRowStyle BackColor="#CCCCCC" BorderColor="Black" BorderStyle="Solid" />
             <Columns>
-                <asp:CommandField ShowEditButton="True" />
+                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
             </Columns>
         </asp:GridView>
         
         <asp:ObjectDataSource ID="odsAutoVehicleFromDataSet"  runat="server" 
-            DeleteMethod="deleteVehicle" 
+            DeleteMethod="DeleteVehicle" 
             InsertMethod="insertVehicle"
             ConflictDetection="CompareAllValues"
             SelectMethod="GetVehicles" 
+            UpdateMethod="UpdateVehicle"
             OldValuesParameterFormatString="original_{0}" 
             OnDeleted="odsAutoVehicleFromDataSet_Deleted" 
             OnUpdated="odsAutoVehicleFromDataSet_Updated"      
-            TypeName="AutoRentals.AutoRentalDataSet"
-            UpdateMethod="UpdateVehicle">
+            TypeName="AutoRentals.AutoRentalDataSet">
             <DeleteParameters>
-                <asp:Parameter Name="og_VIN" Type="String" />
-                <asp:Parameter Name="ogVehicleType" Type="String" />
-                <asp:Parameter Name="og_Make" Type="String" />
-                <asp:Parameter Name="og_Model" Type="String" />
-                <asp:Parameter Name="og_VYear" Type="Int32" />
-                <asp:Parameter Name="og_SeatCapacity" Type="Int32" />
-                <asp:Parameter Name="og_CostPerDay" Type="String" />
-                <asp:Parameter Name="og_ImageURL" Type="String" />
+                <asp:Parameter Name="original_VIN" Type="String" />
+                <asp:Parameter Name="original_VehicleType" Type="String" />
+                <asp:Parameter Name="original_Make" Type="String" />
+                <asp:Parameter Name="original_Model" Type="String" />
+                <asp:Parameter Name="original_VYear" Type="Int32" />
+                <asp:Parameter Name="original_SeatCapacity" Type="Int32" />
+                <asp:Parameter Name="original_CostPerDay" Type="String" />
+                <asp:Parameter Name="original_ImageURL" Type="String" />
             </DeleteParameters>
             <InsertParameters>
                 <asp:Parameter Name="VIN" Type="String" />
@@ -135,13 +139,15 @@
                 <asp:Parameter Name="imageURL" Type="String" />
             </InsertParameters>
             <UpdateParameters>
-                <asp:Parameter Name="vehicleType" Type="String" />
-                <asp:Parameter Name="make" Type="String" />
-                <asp:Parameter Name="model" Type="String" />
-                <asp:Parameter Name="vyear" Type="Int32" />
-                <asp:Parameter Name="seatCapacity" Type="Int32" />
-                <asp:Parameter Name="costPerDay" Type="String" />
-                <asp:Parameter Name="imageURL" Type="String" />
+                <%--VehicleType, Make, Model, VYear, SeatCapacity, CostPerDay, ImageUrl, original_VIN, original_VehicleType, original_Make, original_Model, original_VYear, original_SeatCapacity, original_CostPerDay, original_ImageUrl, VIN. --%>
+
+                <asp:Parameter Name="VehicleType" Type="String" />
+                <asp:Parameter Name="Make" Type="String" />
+                <asp:Parameter Name="Model" Type="String" />
+                <asp:Parameter Name="VYear" Type="Int32" />
+                <asp:Parameter Name="SeatCapacity" Type="Int32" />
+                <asp:Parameter Name="CostPerDay" Type="String" />
+                <asp:Parameter Name="ImageURL" Type="String" />
                 <asp:Parameter Name="original_VIN" Type="String" />
                 <asp:Parameter Name="original_VehicleType" Type="String" />
                 <asp:Parameter Name="original_Make" Type="String" />

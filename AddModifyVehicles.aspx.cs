@@ -22,7 +22,7 @@ namespace AutoRentals
         {
             if (e.Exception != null)
             {
-                lblStatus.Text = "Unable to save changes. " + e.Exception.Message;
+                lblStatus.Text = "Unable to save changes. " + e.Exception.Message.ToString();
                 e.ExceptionHandled = true;
             }
             else if (e.AffectedRows == 0)
