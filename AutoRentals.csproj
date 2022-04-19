@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddModifyVehicles.aspx" />
+    <Content Include="CancelReservation.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Reserve.aspx" />
     <Content Include="Web.config" />
@@ -81,6 +82,13 @@
       <DependentUpon>AddModifyVehicles.aspx</DependentUpon>
     </Compile>
     <Compile Include="AutoRentalDataSet.cs" />
+    <Compile Include="CancelReservation.aspx.cs">
+      <DependentUpon>CancelReservation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CancelReservation.aspx.designer.cs">
+      <DependentUpon>CancelReservation.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
