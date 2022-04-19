@@ -4,10 +4,11 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>CancelReservation</title>
 </head>
 <body>
     <form id="form1" runat="server">
+        <h3>Cancel Reservation</h3>
         <div>
         </div>
     </form>
